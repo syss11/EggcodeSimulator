@@ -1,0 +1,441 @@
+{
+    "AcceptClasses": {
+        
+            "String": {
+                "name": "字符串",
+                "accept-pf": []
+            },
+            "None": {
+                "name": "无",
+                "accept-pf": []
+            },
+            "Int": {
+                "name": "整数",
+                "accept-pf": []
+            },
+            "Float": {
+                "name": "定点数",
+                "accept-pf": []
+            },
+            "Bool": {
+                "name": "布尔值",
+                "accept-pf": [
+                    {
+                        "id":420,
+                        "content":"开（True）"
+                    },
+                    {
+                        "id":421,
+                        "content":"关（False）"
+                    }
+                ]
+            },
+            "Player": {
+                "name": "玩家",
+                "accept-pf": [
+                    {
+                        "id":401,
+                        "content":"玩家1"
+                    },
+                    {
+                        "id":402,
+                        "content":"玩家2"
+                    }
+                ]
+            },
+            "Character": {
+                "name": "角色",
+                "accept-pf": [
+                    {
+                        "id":410,
+                        "content":"玩家1的蛋仔"
+                    },
+                    {
+                        "id":411,
+                        "content":"玩家2的蛋仔"
+                    }
+                ]
+            },
+            "Component": {
+                "name": "组件",
+                "accept-pf": []
+            },
+            "Creature": {
+                "name": "生物",
+                "accept-pf": []
+            },
+            "s": {
+                "name": "任意值",
+                "accept-pf": []
+            },
+            "Position": {
+                "name": "坐标点",
+                "accept-pf": []
+            },
+            "Vector": {
+                "name": "向量",
+                "accept-pf": []
+            },
+            "CC": {
+                "name": "角色/生物",
+                "accept-pf": []
+            },
+            "Rotation": {
+                "name": "旋转角",
+                "accept-pf": []
+            },
+            "ComponentPF": {
+                "name": "组件预设",
+                "accept-pf": [
+                    {
+                        "id":430,
+                        "content":"自定义组件"
+                    }
+                ]
+            },
+            "CreaturePF": {
+                "name": "生物预设",
+                "accept-pf": [
+                    {
+                        "id":431,
+                        "content":"自定义生物"
+                    }
+                ]
+            },
+            "Item": {
+                "name": "物品",
+                "accept-pf": []
+            },
+            "Logic": {
+                "name": "逻辑体",
+                "accept-pf": []
+            },
+            "Area": {
+                "name": "触发区域",
+                "accept-pf": []
+            },
+            "Ability": {
+                "name": "技能",
+                "accept-pf": []
+            },
+            "AbilityPF": {
+                "name": "技能预设",
+                "accept-pf": [
+                    {
+                        "id":432,
+                        "content":"自定义技能"
+                    }
+                ]
+            },
+            "Effect": {
+                "name": "效果",
+                "accept-pf": []
+            },
+            "Timer": {
+                "name": "计时器",
+                "accept-pf": []
+            },
+            "Trigger": {
+                "name": "触发器",
+                "accept-pf": [
+                    {
+                        "id":433,
+                        "content":"当前触发器"
+                    }
+                ]
+            }
+        
+    },
+    "Sort": {
+        "Input":"输入值",
+        "PreFab":"预设",
+        "Event": "事件",
+        "Control": "控制",
+        "Action": "动作",
+        "String": "字符串",
+        "Int": "整数",
+        "Float": "定点数",
+        "Bool": "布尔值",
+        "Player": "玩家",
+        "Character": "角色",
+        "Component": "组件",
+        "Creature": "生物",
+        "Position": "坐标点",
+        "Vector": "向量",
+        "CC": "角色/生物",
+        "Rotation": "旋转角",
+        "ComponentPF": "组件预设",
+        "CreaturePF": "生物预设",
+        "Item": "物品",
+        "Logic": "逻辑体",
+        "Area": "触发区域",
+        "Ability": "技能",
+        "AbilityPF": "技能预设",
+        "Effect": "效果",
+        "Timer": "计时器",
+        
+    "Info": "信息",
+        "Game": "游戏",
+        "Common": "通用",
+        "Table":"表格",
+        "List":"列表",
+        "Pool":"权重池",
+        "UI":"界面",
+        "Audio":"音频",
+        "Camera":"相机",
+        "Trigger":"触发器",
+        "Var":"变量"
+    },
+    "EggCodePrefab": [
+        {
+            "id": 999,
+            "type": "None",
+            "catalog": "Value",
+            "prefabname": "变量",
+            "params": [],
+            "content": [
+                "变量"
+            ]
+        },
+        {
+            "id": 101,
+            "type": "None",
+            "catalog": "Event",
+            "prefabname": "游戏初始化",
+            "params": [],
+            "content": [
+                "游戏初始化"
+            ],
+            "class": "Game"
+        },
+        {
+            "id": 100,
+            "type": "None",
+            "catalog": "Action",
+            "prefabname": "输出信息",
+            "params": [
+                {
+                    "atype": [
+                        "String"
+                    ],
+                    "value": null
+                }
+            ],
+            "content": [
+                "输出信息：",
+                "#"
+            ],
+            "class": "Info"
+        },
+        {
+            "id": 102,
+            "type": "None",
+            "catalog": "Action",
+            "prefabname": "游戏结束",
+            "params": [],
+            "content": [
+                "游戏结束"
+            ],
+            "class": "Game"
+        },
+        {
+            "id": 103,
+            "type": "None",
+            "catalog": "Action",
+            "prefabname": "发送提示给玩家",
+            "params": [
+                {
+                    "atype": [
+                        "Player"
+                    ],
+                    "value": null
+                },
+                {
+                    "atype": [
+                        "String"
+                    ],
+                    "value": null
+                },
+                {
+                    "atype": [
+                        "Float"
+                    ],
+                    "value": null
+                }
+            ],
+            "content": [
+                "给",
+                "#",
+                "发送提示",
+                "#",
+                "，持续时间",
+                "#"
+            ],
+            "class": "Info"
+        },
+        {
+            "id": 104,
+            "type": "String",
+            "catalog": "Value",
+            "prefabname": "字符串扩展",
+            "params": [
+                {
+                    "atype": [
+                        "String"
+                    ],
+                    "value": null
+                },
+                {
+                    "atype": [
+                        "String"
+                    ],
+                    "value": null
+                }
+            ],
+            "content": [
+                "#",
+                "+",
+                "#"
+            ]
+        },
+        {
+            "id": 105,
+            "prefabname": "对象存在",
+            "catalog": "Value",
+            "type": "Bool",
+            "content": [
+                "#",
+                "存在"
+            ],
+            "params": [
+                {
+                    "atype": [
+                        "Character",
+                        "Creature"
+                    ],
+                    "value": null
+                }
+            ],
+            "class": "Common"
+        },
+        {
+            "id": 106,
+            "type": "None",
+            "catalog": "Control",
+            "prefabname": "如果",
+            "params": [
+                {
+                    "atype": [
+                        "Bool"
+                    ],
+                    "value": null
+                }
+            ],
+            "content": [
+                "如果",
+                "#"
+            ],
+            "extraInfo": {
+                "Control": {
+                    "id": "107",
+                    "params": [],
+                    "content": [
+                        "否则"
+                    ]
+                }
+            }
+        },
+        {
+            "id": 108,
+            "type": "None",
+            "catalog": "Control",
+            "prefabname": "运行计时器",
+            "params": [
+                {
+                    "atype": [
+                        "Float"
+                    ],
+                    "value": null
+                },
+                {
+                    "atype":[
+                        "Int"
+                    ],
+                    "value":null
+                }
+            ],
+            "content": [
+                "经过",
+                "#",
+                "秒执行下列动作,执行",
+                "#",
+                "次"
+            ],
+            "extraInfo": {
+                "Control": {}
+            }
+        },
+        {
+            "id": 109,
+            "type": "String",
+            "catalog": "Value",
+            "prefabname": "输入字符串",
+            "params": [
+            ],
+            "content": [
+            ],
+            "extraInfo":{
+                "Input":"String"
+            },
+            "class":"Input"
+        }
+        ,
+        {
+            "id": 110,
+            "type": "Int",
+            "catalog": "Value",
+            "prefabname": "输入整数",
+            "params": [
+            ],
+            "content": [
+            ],
+            "extraInfo":{
+                "Input":"Int"
+            },
+            "class":"Input"
+        }
+        ,
+        {
+            "id": 111,
+            "type": "Float",
+            "catalog": "Value",
+            "prefabname": "输入定点数",
+            "params": [
+            ],
+            "content": [
+            ],
+            "extraInfo":{
+                "Input":"Float"
+            },
+            "class":"Input"
+        }
+    ],
+
+    "EGCPrefab-spare":[
+        
+        {
+            "id": 400,
+            "type": null,
+            "catalog": "Value",
+            "prefabname": null,
+            "params": [
+            ],
+            "content": [
+            ],
+            "extraInfo":{
+                "Fixed":true
+            },
+            "class":"PreFab"
+        }
+    ]
+}
