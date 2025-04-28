@@ -636,6 +636,11 @@ function recursionValueEGC(rootcode,operobj){//rootcode蛋码对象，oper数组
     if(rootcode.prefab.id==400){//400模板预设体蛋码，存id。
         fcode.id=rootcode.prefab.fixed_id
     }
+    if(rootcode.prefab.id==900){
+        rollvar.push(rootcode)
+        fcode.temp=900+rollvar.length
+    }
+
     rootcode.params.forEach(para=>{
         let ncode=para.value//下一层嵌套
         recursionValueEGC(ncode,fcode.args)
@@ -656,10 +661,18 @@ function recursionConEGC(fina,operobj){//fina数组，oper集合类对象
         }
     })
 }
+let rollvar=null//保存时用的变量计数
 function saveEGC(){//保存功能
-    let final={"EggCodes":[]}
-    
+    let final={"EggCodes":[],"Vars":[]}
+    rollvar=[]
     recursionConEGC(final.EggCodes,first)
+    rollvar.forEach((roll,i)=>{
+        final.Vars.push({
+            'temp':900+1+i,
+            'type':roll.type,
+            'name':roll.content[0]
+        })
+    })
     saveJSON(final)
 }
 
