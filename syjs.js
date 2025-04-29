@@ -52,6 +52,7 @@ class EggcodePrefab{//蛋码预设体
         if(!targetV.eventEstablished){
             targetV.eventEstablished=true
             targetV.parent.eventcode=newEggCode
+            targetV.parent.newEGCA()
         }
         //重置空缺的DOM位置
         if(targetV.isAction){
@@ -162,7 +163,7 @@ class EggAssembly{
         this.parent=parent
         this.vac=null//空缺
         this.instance=document.createElement('span')
-        this.instance.classList.add("assemble")
+        
         this.not_main=this.parent instanceof EggcodeControl
 
         this.vac=new Vacanacy(this,true)//循环引用？
@@ -177,6 +178,7 @@ class EggAssembly{
             this.instance.classList.add("assembleC")
         }else{
             this.parent.appendChild(this.instance)
+            this.instance.classList.add("assemble")
         }
         
         this.eventcode=null//对应的事件蛋码
@@ -189,6 +191,13 @@ class EggAssembly{
             
 
         })
+    }
+
+    newEGCA(){
+        if(auto){
+            return
+        }
+        AllofEGCAs.push(new EggAssembly(main))
     }
 }
 //蛋码对象，程序的核心，拥有树状结构。
@@ -324,7 +333,7 @@ class Eggcode{
         this.instance.remove()
     }
 
-    findroot(){//没用到，写都写了，寻根
+    findroot(){//寻根
         if(this.catalog!="Value" && this.catalog!="Bool"){
             return this
         }else{
@@ -387,7 +396,7 @@ class Vacanacy{//表示蛋码空缺处，有两种类别
         this.index=-1//表示在蛋码的第几个空缺，-1为动作
         this.availType=[]//可接受参数类型，从params的键复制来
         this.instance=null
-        this.eventEstablished=false//作为动作时，他能不能选事件
+        this.eventEstablished=!isAction//作为动作时，他能不能选事件
         this.awhere=0//act,在第几个
        
     
@@ -455,6 +464,7 @@ let allsorts={}//sortdomyuansu
 let allsorts_index=[]
 let types_and_pfs={}
 let model=null
+let auto=false
 function loadprefab(){//加载文件读取预设配置
     let prefablist=[]
     
@@ -555,7 +565,7 @@ let notice = document.getElementById('notice')//用户可以读到的提示
 let nameinput=document.getElementById("EGCname")
 let navi=document.getElementById('navi')
 let AllofPrefabs=[]
-let first=null//全局蛋码集合，EGCA
+let AllofEGCAs=[]//全局蛋码集合，EGCA
 let catasDict={
     "Event":"事件",
     "Value":"取值",
@@ -665,7 +675,12 @@ let rollvar=null//保存时用的变量计数
 function saveEGC(){//保存功能
     let final={"EggCodes":[],"Vars":[]}
     rollvar=[]
-    recursionConEGC(final.EggCodes,first)
+    AllofEGCAs.forEach(egca=>{
+        let tempfina=[]
+        recursionConEGC(tempfina,egca)
+        final.EggCodes.push(tempfina)
+    })
+    
     rollvar.forEach((roll,i)=>{
         final.Vars.push({
             'temp':900+1+i,
@@ -681,8 +696,11 @@ function openEGC(){
 }
 
 function cleanEGC(){//清除所有蛋码
-    first.instance.remove()
-    first=new EggAssembly(main)
+    AllofEGCAs.forEach(egca=>{
+        egca.instance.remove()
+    })
+    AllofEGCAs=[]
+    //AllofEGCAs.push(new EggAssembly(main))
     allEGCs.forEach(egc =>{
         egc.clean()
     })
@@ -707,16 +725,24 @@ fileInput.addEventListener('change', function () {//打开蛋码文件
 
             
             cleanEGC()
+            //ALLofegca已经清空
 
             let varsload=dataf['Vars']
             varsload.forEach(vsl=>{
                 loadV(vsl.name,vsl.type,vsl.temp)
             })
-            console.dir(construct(first,dataf["EggCodes"]))
+
             nameinput.value=selectedFile.name
-            first.codes.forEach(co=>{
-                co.parent=first
+            auto=true
+            dataf.EggCodes.forEach(dataegc=>{
+                let tempnewegca=new EggAssembly(main)
+                console.dir(construct(tempnewegca,dataegc))
+                AllofEGCAs.push(tempnewegca)
+                tempnewegca.codes.forEach(co=>{
+                co.parent=tempnewegca 
+                })
             })
+            auto=false
         }
         };
 
@@ -783,7 +809,7 @@ document.addEventListener('click',function(){
 let WHO = null//who是焦点蛋码
 
 document.addEventListener("DOMContentLoaded",()=>{//main函数
-    first=new EggAssembly(main)
+    AllofEGCAs.push(new EggAssembly(main))
     
     
 loadprefab().then(pflist=>{//等文件读完
@@ -824,6 +850,10 @@ function deleteEGC(){//删除蛋码who
     if(!WHO){
         return
     }
+    if(!WHO instanceof Eggcode){
+        return
+    }
+    let whoseparent=WHO.findroot().parent
     if(WHO.catalog=="Value" ||WHO.catalog=='Var'){
         let whereme=0
         WHO.parent.params.forEach((para,i)=>{
@@ -857,7 +887,8 @@ function deleteEGC(){//删除蛋码who
         }
     }
 }
-    first.vac.refresh()
+WHO=null
+    whoseparent.vac.refresh()
 }
 
 function copyEGC(){//复制
@@ -970,5 +1001,14 @@ function createInput(targetEGC,inputtype,egcdom){
     return inp
 }
 
-
+let flexdir='column'
+function changeflex(){
+    if(flexdir=='row'){
+        flexdir='column'
+        
+    }else{
+        flexdir='row'
+    }
+    main.style.flexDirection=flexdir
+}
 

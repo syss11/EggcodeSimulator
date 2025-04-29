@@ -14,16 +14,18 @@
     </div>
     
     <h3 style="display: inline;margin-left: 10px;">蛋码模拟器</h3>
+    
+    <input type="text" id="EGCname" maxlength="16" placeholder="作品名称"
+    style="background-color: aquamarine;border-radius: 5px;">
+
     <!-- <a href="/egcProducer" target="_blank">前往制作蛋码</a> -->
     <br>
     <div id="operatebar1" class="operatebar">
-
-        <input type="text" id="EGCname" maxlength="16" placeholder="作品名称"
-            style="background-color: aquamarine;border-radius: 5px;">
-        <button id="saver" onclick="saveEGC()" class="oper" title="json格式">保存作品</button>
+<button id="saver" onclick="saveEGC()" class="oper" title="json格式">保存作品</button>
         <button id="opener" onclick="openEGC()" class="oper" title="会清空已有蛋码">打开作品</button>
         <input type="file" style="display: none;" id="fileopener" accept=".json">
         <button id="learner" onclick="learn()" class="oper" title="暂无">查看文档</button>
+        <button id="ffll" onclick="changeflex()" class="oper" title="多蛋码排布方向">更换排列</button>
     </div>
     <div id="operatebar2" class="operatebar">
         <p id="notice" style="font-weight: bold;display: inline;margin: 5px;">暂无提示</p>

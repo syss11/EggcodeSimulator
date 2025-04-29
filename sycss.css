@@ -44,7 +44,8 @@ body{
 }
 .vacancyAS{
     cursor:pointer;
-    display: inline-block;
+    display: block;
+    width: fit-content;
     background-color: rgb(17, 14, 148,0.4);
     border-radius: 5px;
     border:3px solid grey;
@@ -62,15 +63,16 @@ body{
 #main{
     vertical-align: top;
     padding: 3px;
-    display: inline-block;
+    display: flex;
     background-color: midnightblue;
-    width: 65%;
+    width: 70%;
     height: 650px;
     padding: 10px;
     overflow: auto;
     border: 3px solid rgb(4, 55, 221);
     border-radius: 5px;
     box-sizing: border-box;
+    flex-direction: column;
 }
 #selector{
     vertical-align: top;
@@ -89,7 +91,7 @@ body{
 #rightarea{
     flex-direction: column;
     display: flex;
-    width: 30%;
+    width: 25%;
 }
 #rrarea{
     flex-direction: column;
@@ -328,19 +330,26 @@ body{
 }
 
 .assemble{
-    
-    overflow-x: auto;
-  
+    border-radius: 10px;
+    display: block;
+    height: fit-content;
+    margin: 4px;
+    margin-bottom: 50px;
+    padding: 4px;
+    background-color: midnightblue;
+    width: fit-content;
 }
 #newV:hover{
     background-color: rgb(226, 43, 195);
 }
 
 .assembleC{
+
     display: inline-block;
     overflow-x: auto;
     background-color: midnightblue;
     width: 100%;
+    margin-bottom: 0px;
 }
 /* 
 .optbutton{
