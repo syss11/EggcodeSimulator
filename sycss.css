@@ -74,6 +74,11 @@ body{
     box-sizing: border-box;
     flex-direction: column;
 }
+@media (max-width: 768px) {
+    #main {
+        width: 65%;
+    }
+}
 #selector{
     vertical-align: top;
     padding: 3px;
@@ -91,8 +96,14 @@ body{
 #rightarea{
     flex-direction: column;
     display: flex;
-    width: 25%;
+    width: 30%;
 }
+    @media (max-width: 768px) {
+        #rightarea {
+            width: 35%;
+        }
+    }
+
 #rrarea{
     flex-direction: column;
     display: flex;
