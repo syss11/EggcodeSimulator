@@ -468,7 +468,7 @@ let auto=false
 function loadprefab(){//加载文件读取预设配置
     let prefablist=[]
     
-    return fetch('syjson.json')
+    return fetch('/EggcodeSimulator/syjson.json')
     .then(response => {
           if (!response.ok) {
               throw new Error('?')
