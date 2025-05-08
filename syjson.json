@@ -1,154 +1,152 @@
 {
     "AcceptClasses": {
-        
-            "String": {
-                "name": "字符串",
-                "accept-pf": []
-            },
-            "None": {
-                "name": "无",
-                "accept-pf": []
-            },
-            "Int": {
-                "name": "整数",
-                "accept-pf": []
-            },
-            "Float": {
-                "name": "定点数",
-                "accept-pf": []
-            },
-            "Bool": {
-                "name": "布尔值",
-                "accept-pf": [
-                    {
-                        "id":420,
-                        "content":"开（True）"
-                    },
-                    {
-                        "id":421,
-                        "content":"关（False）"
-                    }
-                ]
-            },
-            "Player": {
-                "name": "玩家",
-                "accept-pf": [
-                    {
-                        "id":401,
-                        "content":"玩家1"
-                    },
-                    {
-                        "id":402,
-                        "content":"玩家2"
-                    }
-                ]
-            },
-            "Character": {
-                "name": "角色",
-                "accept-pf": [
-                    {
-                        "id":410,
-                        "content":"玩家1的蛋仔"
-                    },
-                    {
-                        "id":411,
-                        "content":"玩家2的蛋仔"
-                    }
-                ]
-            },
-            "Component": {
-                "name": "组件",
-                "accept-pf": []
-            },
-            "Creature": {
-                "name": "生物",
-                "accept-pf": []
-            },
-            "s": {
-                "name": "任意值",
-                "accept-pf": []
-            },
-            "Position": {
-                "name": "坐标点",
-                "accept-pf": []
-            },
-            "Vector": {
-                "name": "向量",
-                "accept-pf": []
-            },
-            "CC": {
-                "name": "角色/生物",
-                "accept-pf": []
-            },
-            "Rotation": {
-                "name": "旋转角",
-                "accept-pf": []
-            },
-            "ComponentPF": {
-                "name": "组件预设",
-                "accept-pf": [
-                    {
-                        "id":430,
-                        "content":"自定义组件"
-                    }
-                ]
-            },
-            "CreaturePF": {
-                "name": "生物预设",
-                "accept-pf": [
-                    {
-                        "id":431,
-                        "content":"自定义生物"
-                    }
-                ]
-            },
-            "Item": {
-                "name": "物品",
-                "accept-pf": []
-            },
-            "Logic": {
-                "name": "逻辑体",
-                "accept-pf": []
-            },
-            "Area": {
-                "name": "触发区域",
-                "accept-pf": []
-            },
-            "Ability": {
-                "name": "技能",
-                "accept-pf": []
-            },
-            "AbilityPF": {
-                "name": "技能预设",
-                "accept-pf": [
-                    {
-                        "id":432,
-                        "content":"自定义技能"
-                    }
-                ]
-            },
-            "Effect": {
-                "name": "效果",
-                "accept-pf": []
-            },
-            "Timer": {
-                "name": "计时器",
-                "accept-pf": []
-            },
-            "Trigger": {
-                "name": "触发器",
-                "accept-pf": [
-                    {
-                        "id":433,
-                        "content":"当前触发器"
-                    }
-                ]
-            }
-        
+        "String": {
+            "name": "字符串",
+            "accept-pf": []
+        },
+        "None": {
+            "name": "无",
+            "accept-pf": []
+        },
+        "Int": {
+            "name": "整数",
+            "accept-pf": []
+        },
+        "Float": {
+            "name": "定点数",
+            "accept-pf": []
+        },
+        "Bool": {
+            "name": "布尔值",
+            "accept-pf": [
+                {
+                    "id": 420,
+                    "content": "开（True）"
+                },
+                {
+                    "id": 421,
+                    "content": "关（False）"
+                }
+            ]
+        },
+        "Player": {
+            "name": "玩家",
+            "accept-pf": [
+                {
+                    "id": 401,
+                    "content": "玩家1"
+                },
+                {
+                    "id": 402,
+                    "content": "玩家2"
+                }
+            ]
+        },
+        "Character": {
+            "name": "角色",
+            "accept-pf": [
+                {
+                    "id": 410,
+                    "content": "玩家1的蛋仔"
+                },
+                {
+                    "id": 411,
+                    "content": "玩家2的蛋仔"
+                }
+            ]
+        },
+        "Component": {
+            "name": "组件",
+            "accept-pf": []
+        },
+        "Creature": {
+            "name": "生物",
+            "accept-pf": []
+        },
+        "s": {
+            "name": "任意值",
+            "accept-pf": []
+        },
+        "Position": {
+            "name": "坐标点",
+            "accept-pf": []
+        },
+        "Vector": {
+            "name": "向量",
+            "accept-pf": []
+        },
+        "CC": {
+            "name": "角色/生物",
+            "accept-pf": []
+        },
+        "Rotation": {
+            "name": "旋转角",
+            "accept-pf": []
+        },
+        "ComponentPF": {
+            "name": "组件预设",
+            "accept-pf": [
+                {
+                    "id": 430,
+                    "content": "自定义组件"
+                }
+            ]
+        },
+        "CreaturePF": {
+            "name": "生物预设",
+            "accept-pf": [
+                {
+                    "id": 431,
+                    "content": "自定义生物"
+                }
+            ]
+        },
+        "Item": {
+            "name": "物品",
+            "accept-pf": []
+        },
+        "Logic": {
+            "name": "逻辑体",
+            "accept-pf": []
+        },
+        "Area": {
+            "name": "触发区域",
+            "accept-pf": []
+        },
+        "Ability": {
+            "name": "技能",
+            "accept-pf": []
+        },
+        "AbilityPF": {
+            "name": "技能预设",
+            "accept-pf": [
+                {
+                    "id": 432,
+                    "content": "自定义技能"
+                }
+            ]
+        },
+        "Effect": {
+            "name": "效果",
+            "accept-pf": []
+        },
+        "Timer": {
+            "name": "计时器",
+            "accept-pf": []
+        },
+        "Trigger": {
+            "name": "触发器",
+            "accept-pf": [
+                {
+                    "id": 433,
+                    "content": "当前触发器"
+                }
+            ]
+        }
     },
     "Sort": {
-        "Input":"输入值",
-        "PreFab":"预设",
+        "Input": "输入值",
+        "PreFab": "预设",
         "Event": "事件",
         "Control": "控制",
         "Action": "动作",
@@ -173,18 +171,17 @@
         "AbilityPF": "技能预设",
         "Effect": "效果",
         "Timer": "计时器",
-        
-    "Info": "信息",
+        "Info": "信息",
         "Game": "游戏",
         "Common": "通用",
-        "Table":"表格",
-        "List":"列表",
-        "Pool":"权重池",
-        "UI":"界面",
-        "Audio":"音频",
-        "Camera":"相机",
-        "Trigger":"触发器",
-        "Var":"变量"
+        "Table": "表格",
+        "List": "列表",
+        "Pool": "权重池",
+        "UI": "界面",
+        "Audio": "音频",
+        "Camera": "相机",
+        "Trigger": "触发器",
+        "Var": "变量"
     },
     "EggCodePrefab": [
         {
@@ -358,10 +355,10 @@
                     "value": null
                 },
                 {
-                    "atype":[
+                    "atype": [
                         "Int"
                     ],
-                    "value":null
+                    "value": null
                 }
             ],
             "content": [
@@ -380,62 +377,154 @@
             "type": "String",
             "catalog": "Value",
             "prefabname": "输入字符串",
-            "params": [
-            ],
-            "content": [
-            ],
-            "extraInfo":{
-                "Input":"String"
+            "params": [],
+            "content": [],
+            "extraInfo": {
+                "Input": "String"
             },
-            "class":"Input"
-        }
-        ,
+            "class": "Input"
+        },
         {
             "id": 110,
             "type": "Int",
             "catalog": "Value",
             "prefabname": "输入整数",
-            "params": [
-            ],
-            "content": [
-            ],
-            "extraInfo":{
-                "Input":"Int"
+            "params": [],
+            "content": [],
+            "extraInfo": {
+                "Input": "Int"
             },
-            "class":"Input"
-        }
-        ,
+            "class": "Input"
+        },
         {
             "id": 111,
             "type": "Float",
             "catalog": "Value",
             "prefabname": "输入定点数",
-            "params": [
-            ],
-            "content": [
-            ],
-            "extraInfo":{
-                "Input":"Float"
+            "params": [],
+            "content": [],
+            "extraInfo": {
+                "Input": "Float"
             },
-            "class":"Input"
+            "class": "Input"
+        },
+        {
+            "id":112,
+            "prefabname": "组件添加力的作用",
+            "catalog": "Action",
+            "type": "None",
+            "content": [
+                "给",
+                "#",
+                "添加力，大小为",
+                "#"
+            ],
+            "params": [
+                {
+                    "atype": [
+                        "Component"
+                    ],
+                    "value": null
+                },
+                {
+                    "atype": [
+                        "Vector"
+                    ],
+                    "value": null
+                }
+            ],
+            "class": null
+        },
+        {
+            "id":113,
+            "prefabname": "造成伤害",
+            "catalog": "Action",
+            "type": "None",
+            "content": [
+                "对",
+                "#",
+                "造成",
+                "#",
+                "伤害，伤害来源",
+                "#"
+            ],
+            "params": [
+                {
+                    "atype": [
+                        "CC",
+                        "Character",
+                        "Creature"
+                    ],
+                    "value": null
+                },
+                {
+                    "atype": [
+                        "Float"
+                    ],
+                    "value": null
+                },
+                {
+                    "atype": [
+                        "CC",
+                        "Character",
+                        "Creature"
+                    ],
+                    "value": null
+                }
+            ],
+            "class": null
+        },
+        {
+            "id":114,
+            "prefabname": "发送自定义事件",
+            "catalog": "Action",
+            "type": "None",
+            "content": [
+                "发送自定义事件：",
+                "#"
+            ],
+            "params": [
+                {
+                    "atype": [
+                        "String"
+                    ],
+                    "value": null
+                }
+            ],
+            "class": null
+        },
+        {
+            "id":115,
+            "prefabname": "接收自定义事件",
+            "catalog": "Event",
+            "type": "None",
+            "content": [
+                "接收自定义事件：",
+                "#"
+            ],
+            "params": [
+                {
+                    "atype": [
+                        "String"
+                    ],
+                    "value": null
+                }
+            ],
+            "class": null
         }
     ],
-
-    "EGCPrefab-spare":[
-        
+    "EGCPrefab-spare": [
         {
             "id": 400,
             "type": null,
             "catalog": "Value",
             "prefabname": null,
-            "params": [
-            ],
-            "content": [
-            ],
-            "extraInfo":{
-                "Fixed":true
+            "params": [],
+            "content": [],
+            "extraInfo": {
+                "Fixed": true
             },
-            "class":"PreFab"
+            "class": "PreFab"
         }
     ]
 }

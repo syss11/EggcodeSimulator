@@ -577,21 +577,27 @@ let typesDict={
 }
 let alltypes={}
 
-function changePrefabs(types,establishV){//参数为类型列表，改变显示预设
+function changePrefabs(types,establishV,privilege=null){//参数为类型列表，改变显示预设
     let avy=(types.length==0)
+    if(!privilege){
     let display = ""
     types.forEach(ty=>{
         display+=typesDict[ty]
         display+=","
     })
-    allsorts_index.forEach(sor=>{
-        allsorts[sor].classList.add("nodisplay")
-        allsorts[sor].myNavi.classList.add('nodisplay')
-    })
+    
     if(avy){display="无"}//显示无
     notice.innerText="类型："+display
+    }else{
+    notice.innerText="查找成功"
+    }   
+    allsorts_index.forEach(sor=>{
+    allsorts[sor].classList.add("nodisplay")
+    allsorts[sor].myNavi.classList.add('nodisplay')
+    })
+
     AllofPrefabs.forEach(pf=>{
-        
+        if(!privilege){
         //检查积木预设符不符合
         if(avy){
             if(establishV){
@@ -602,6 +608,9 @@ function changePrefabs(types,establishV){//参数为类型列表，改变显示�
             
         }else{
             pf.setVisible(types.includes(pf.type))
+        }}
+        else{
+            pf.setVisible(privilege.includes(pf))
         }
     })
 }
@@ -1012,3 +1021,22 @@ function changeflex(){
     main.style.flexDirection=flexdir
 }
 
+function query(q){
+    if(!q)return;
+    results=new Set()
+    AllofPrefabs.forEach(pf=>{
+        if(pf.prefabname.includes(q)){
+            results.add(pf)
+        }else{
+            pf.content.forEach(pfc=>{
+                if(pfc.includes(q)){
+                    results.add(pf)
+                }
+            })
+        }
+    })
+    
+    changePrefabs(Object.keys(typesDict),false,Array.from(results))
+    
+
+}
