@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蛋码制作</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-size: cover;
+            background-image: url(/static/eggloading.jpg); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #ffeb3b; /* 黄色容器背景 */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: none;
+            height: 100px;
+        }
+        #sele{
+            background-color: #fcec59;
+            margin: 5px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #fbc02d; /* 深一点的黄色按钮 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #f9a825; /* 鼠标悬停时颜色变深 */
+        }
+
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>蛋码模拟器-创建蛋码！</h1>
+        <p>在这里制作蛋码！生成json发给作者即可</p>
+        <input type="text" id="pfname" placeholder="预设名称">
+        <input type="radio" name="cata" id="event" value="Event">
+        <label for="event">事件</label>
+        <input type="radio" name="cata" id="action" value="Action">
+        <label for="action">动作</label>
+        <input type="radio" name="cata" id="value" value="Value">
+        <label for="value">取值</label>
+        <br>
+        返回类型：<select id="sele" ></select>
+        <br>
+        功能分类（可为无）：<select id="seleclass"></select>
+        <textarea id="pfcontent" placeholder="蛋码内容表达式（最下面按钮有语法）" style="border:   3px solid burlywood;"></textarea>
+        
+        <br>
+        <textarea id="output" readonly></textarea>
+        <button onclick="pText()">生成</button>
+        <button onclick="sub()">提交</button>
+        <!-- <button onclick="sub()">提交</button> -->
+        <p id="notice">生成没有错误时可以提交</p>
+        <button onclick="info()">如何填写蛋码内容？</button>
+    </div>
+
+    <script>
+        let typesDict={//显示出来的样子
+    "String":"字符串",
+    "None":"无",
+    "Int":"整数",
+    "Float":"定点数",
+    "Bool":"布尔值",
+    "Player":"玩家",
+    "Character":"角色",
+    "Component":"组件",
+    "Creature":"生物",
+    "s":"任意值",
+    "Position":"坐标点",
+    "Vector":"向量",
+    "CC":"角色/生物",
+    "Rotation":"旋转角",
+    "ComponentPF":"组件预设",
+    "CreaturePF":"生物预设",
+    "Item":"物品",
+    "Logic":"逻辑体",
+    "Area":"触发区域",
+    "Ability":"技能",
+    "AbilityPF":"技能预设",
+    "Effect":"效果",
+    "Timer":"计时器",
+    "Trigger":"触发器"
+
+
+}
+alltypes=Object.keys(typesDict)
+let namesDict={}
+const vtypes=document.getElementById('sele')
+alltypes.forEach(typ=>{
+    namesDict[typesDict[typ]]=typ
+    if(typ=="s" || typ=="None"){
+        return
+    }
+    let newo=document.createElement('option')
+    vtypes.appendChild(newo)
+    
+    newo.innerText=typesDict[typ]
+    
+
+})
+let cladict={
+    "N":"无",
+    "Control": "控制",
+    "Info": "信息",
+        "Game": "游戏",
+        "Common": "通用",
+        "Table":"表格",
+        "List":"列表",
+        "Pool":"权重池",
+        "UI":"界面",
+        "Audio":"音频",
+        "Camera":"相机",
+        "Trigger":"触发器"
+    
+}
+allclasses=Object.keys(cladict)
+let claaDict={}
+const cla=document.getElementById('seleclass')
+allclasses.forEach(typ=>{
+    claaDict[cladict[typ]]=typ
+   
+    let newo=document.createElement('option')
+    newo.value=typ
+    cla.appendChild(newo)
+    
+    newo.innerText=cladict[typ]
+    
+
+})
+
+        const isValue=document.getElementById("value")
+        const vals=document.getElementsByName("type")
+        
+        
+        
+        const name = document.getElementById('pfname');
+        const outputField = document.getElementById('output');
+        const inp=document.getElementById("pfcontent")
+        const notice=document.getElementById("notice")
+
+        function process(inputString) {
+            const p = [];
+            const c = [];
+            const stringArray = inputString.split(' ');
+
+            for (let i = 0; i < stringArray.length; i++) {
+                const currentString = stringArray[i];
+                if (currentString[0] === '#') {
+                    let ttys=currentString.slice(1).split("-")
+                    let allty=[]
+                    ttys.forEach(tty=>{
+                        ty=namesDict[tty]
+                        if(!ty){
+                        alert("类型空格有不支持类型")
+                        }else{
+                            allty.push(ty)
+                        }
+                    })
+                    
+                    
+
+                    let pp={
+                        "atype":allty,
+                        "value":null
+                    }
+                    p.push(pp);
+                    c.push('#');
+                } else {
+                    c.push(currentString);
+                }
+            }
+
+            return { p, c };
+}
+
+        function pText() {
+            let cata=document.querySelector('input[name="cata"]:checked')
+            let typ={"value":vtypes.value}
+            let clas=cla.value
+            if(clas=="N"){
+                clas=null
+            }
+            if(!cata){
+                notice.innerText="请不要留空缺"
+                return
+            }
+            if(cata!=isValue){
+                typ={"value":"None"}
+            }
+            if(!typ){
+                typ={"value":"None"}
+            }
+            let pc=process(inp.value)
+            obj={
+                "prefabname":name.value,
+                "catalog":cata.value,
+                "type":namesDict[typ.value],
+                "content":pc.c,
+                "params":pc.p,
+                "class":clas
+            }
+
+            outputField.innerText=JSON.stringify(obj)
+            
+            notice.innerText="完成"
+            
+            //outputField.select()
+            //document.execCommand('copy')
+        }
+        function sub(){
+            if(!obj){
+                alert("未完成")
+                return
+            }
+            fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(obj)
+                }).then(res=>{
+                    if(!res.ok){
+                        throw new Error("网络不好")
+                    }
+                    return res.json()
+                }).then(result => {
+                    if(result.status){
+                        notice.innerText="成功"
+                        location.reload()
+                    }else{
+                        notice.innerText="失败"
+                    }
+                }).catch(error => {
+                    notice.innerText = `错误: ${error.message}`;
+                });
+        }
+        
+        function info(){
+            
+            alert("蛋码内容每一块用空格隔开，参数格用#开头+中文类型名表示，多类型空格需要加上横杠连接，如‘击败 #角色-生物-角色/生物’是可选三种类型的动作积木。返回类型就是蛋码执行结果的类型，功能分类可以写无")
+        }
+        let obj=null
+    </script>
+</body>
+
+</html>

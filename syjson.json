@@ -307,8 +307,7 @@
             "params": [
                 {
                     "atype": [
-                        "Character",
-                        "Creature"
+                        "Character","Creature","Component"
                     ],
                     "value": null
                 }
