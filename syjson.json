@@ -142,6 +142,30 @@
                     "content": "当前触发器"
                 }
             ]
+        },
+        "Calculate":{
+            "name":"运算枚举",
+            "accept-pf":[
+                {
+                    "id":434,
+                    "content":"加法 +"
+                },{
+                    "id":435,
+                    "content":"减法 -"
+                },{
+                    "id":436,
+                    "content":"乘法 *"
+                },{
+                    "id":437,
+                    "content":"除法 /"
+                },{
+                    "id":438,
+                    "content":"幂运算 ^"
+                },{
+                    "id":439,
+                    "content":"取余 %"
+                }
+            ]
         }
     },
     "Sort": {

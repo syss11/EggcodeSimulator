@@ -93,7 +93,7 @@
         <textarea id="pfcontent" placeholder="蛋码内容表达式（最下面按钮有语法）" style="border:   3px solid burlywood;"></textarea>
         
         <br>
-        <textarea id="output" readonly></textarea>
+        <textarea id="output"></textarea>
         <button onclick="pText()">生成</button>
         <button onclick="sub()">提交</button>
         <!-- <button onclick="sub()">提交</button> -->
@@ -174,7 +174,12 @@ allclasses.forEach(typ=>{
     
 
 })
-
+Object.keys(typesDict).forEach(tpsd=>{
+    let newo=document.createElement('option')
+    newo.value=tpsd
+    cla.appendChild(newo)
+    newo.innerText=typesDict[tpsd]
+})
         const isValue=document.getElementById("value")
         const vals=document.getElementsByName("type")
         
@@ -247,7 +252,7 @@ allclasses.forEach(typ=>{
                 "class":clas
             }
 
-            outputField.innerText=JSON.stringify(obj)
+            outputField.value=JSON.stringify(obj)
             
             notice.innerText="完成"
             
@@ -255,6 +260,7 @@ allclasses.forEach(typ=>{
             //document.execCommand('copy')
         }
         function sub(){
+            obj=JSON.parse(outputField.value)
             if(!obj){
                 alert("未完成")
                 return

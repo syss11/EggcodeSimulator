@@ -142,6 +142,30 @@
                     "content": "当前触发器"
                 }
             ]
+        },
+        "Calculate":{
+            "name":"运算枚举",
+            "accept-pf":[
+                {
+                    "id":434,
+                    "content":"+"
+                },{
+                    "id":435,
+                    "content":"-"
+                },{
+                    "id":436,
+                    "content":"*"
+                },{
+                    "id":437,
+                    "content":"/"
+                },{
+                    "id":438,
+                    "content":"^"
+                },{
+                    "id":439,
+                    "content":"%"
+                }
+            ]
         }
     },
     "Sort": {
