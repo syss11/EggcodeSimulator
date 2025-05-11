@@ -34,11 +34,11 @@ def egcproduce():
 def makejson():#用字符串暴力凑json格式
     conn,cur=dbconnect()
     
-    allegcp=cur.execute('SELECT pfcontent FROM egcpf')
+    allegcp=cur.execute('SELECT id,pfcontent FROM egcpf')
     txtall=''
     ind=0
     for egc in allegcp:
-        tempe=egc[0][:-1]+',"id":'+str(ind+1)+'}'
+        tempe=egc[1][:-1]+',"id":'+str(egc[0])+'}'
         txtall+=tempe+','
         ind+=1
 

@@ -534,6 +534,41 @@
                 }
             ],
             "class": null
+        },{
+            
+            "prefabname": "触发事件的玩家",
+            "catalog": "Value",
+            "type": "Player",
+            "content": [
+                "触发事件的玩家"
+            ],
+            "params": [
+                
+            ],
+            "class": null,
+            "hide":true
+        },
+        {
+            
+            "prefabname": "接收自定义事件(附带玩家)",
+            "catalog": "Event",
+            "type": "None",
+            "content": [
+                "接收自定义事件(附带玩家)：",
+                "#"
+            ],
+            "params": [
+                {
+                    "atype": [
+                        "String"
+                    ],
+                    "value": null
+                }
+            ],
+            "class": null,
+            "provide":[
+                45
+            ]
         }
     ],
     "EGCPrefab-spare": [

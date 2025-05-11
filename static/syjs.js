@@ -42,16 +42,19 @@ class EggcodePrefab{//蛋码预设体
         newEggCode.catalog=this.catalog
         newEggCode.params=JSON.parse(JSON.stringify(this.params))//复制构造
         newEggCode.index=targetV.index//第几个
-
+        newEggCode.provide=this.provide
         newEggCode.content=this.content//引用构造
 
         if(targetV.isAction){
             targetV.parent.codes.splice(newEggCode.awhere,0,newEggCode)
         }
         newEggCode.initInstance(targetV.pos)
+
         if(!targetV.eventEstablished){
+
             targetV.eventEstablished=true
             targetV.parent.eventcode=newEggCode
+            targetV.parent.domain_pfs=this.provide
             targetV.parent.newEGCA()
         }
         //重置空缺的DOM位置
@@ -100,20 +103,22 @@ class EggcodePrefab{//蛋码预设体
     }
 
     setVisible(vis){//设置可见性
-        if(!this.instance){
-            return
-        }
+        
+        // if(!this.instance){
+        //     return
+        // }
         if(vis){
             this.instance.classList.remove("nodisplay")
             this.instance.parentElement.classList.remove('nodisplay')
             this.instance.parentElement.myNavi.classList.remove('nodisplay')
             //检查积木预设符不符合
+            console.log(this)
         }else{
             this.instance.classList.add("nodisplay")
         }
     }
     initInstance(sorts){//实例化dom
-        if(this.id==999){
+        if(false){
             this.instance=null
             //varmodel=this
             return
@@ -163,7 +168,7 @@ class EggAssembly{
         this.parent=parent
         this.vac=null//空缺
         this.instance=document.createElement('span')
-        
+        this.domain_pfs=null
         this.not_main=this.parent instanceof EggcodeControl
 
         this.vac=new Vacanacy(this,true)//循环引用？
@@ -176,9 +181,17 @@ class EggAssembly{
 
             this.vac.eventEstablished=true
             this.instance.classList.add("assembleC")
+            if(this.parent.provide){
+                this.domain_pfs=this.parent.provide
+            }else{
+                this.domain_pfs=this.parent.parent.domain_pfs
+            }
+
         }else{
             this.parent.appendChild(this.instance)
             this.instance.classList.add("assemble")
+
+            this.domain_pfs=[]
         }
         
         this.eventcode=null//对应的事件蛋码
@@ -208,6 +221,7 @@ class Eggcode{
         this.catalog=""//类别，动作Action，取值Value
        
         this.params=[]//对象数组，对象atype：参数类型列表，对象value：其他蛋码或空缺
+        this.provide=null //事件或控制提供额外蛋吗预设,[id...]
 
         this.content=[]//蛋码内容，与params完全符合对应
         this.instance=null//蛋码的DOM
@@ -254,9 +268,15 @@ class Eggcode{
             }
             WHO=this
             operatable(true)
+
+            notice2.innerText="当前选中："+this.prefab.prefabname+" => "+typesDict[this.prefab.type]
+        
             this.instance.classList.add("selected")
-            if(this.catalog!="Action" && this.catalog!="Event" && this.catalog!='Control'){
+            if(this.catalog!="Action" && this.catalog!="Event"  && this.catalog!='Control'){
                 return
+            }
+            if(this.catalog=="Control"){
+                if(this.otherInfo)return;//紫色连积木的第一个不能点
             }
             let nowV=this.parent.vac
             console.dir(this)
@@ -296,9 +316,21 @@ class Eggcode{
             }
             
         });
+        if(this.provide){
+            //this.instance.classList.add(this.catalog+'withProvide')
+            this.provide.forEach(dpf=>{
+
+                let nc=document.createElement('span')
+                nc.innerHTML='<p class="codeP">'+dpf.prefabname+'</p>'
+                nc.classList.add('eValue')
+
+                this.instance.appendChild(nc)
+            })
+        }
         if(this instanceof EggcodeControl){
             this.second()
         }
+
     }
 
     // second(){
@@ -454,7 +486,7 @@ class Vacanacy{//表示蛋码空缺处，有两种类别
             }
             WHO=this
             this.instance.classList.add("selected")
-            changePrefabs(this.availType,this.eventEstablished)
+            changePrefabs(this.availType,this)
         })
 
     }
@@ -465,6 +497,7 @@ let allsorts_index=[]
 let types_and_pfs={}
 let model=null
 let auto=false
+let hideslist=[]
 function loadprefab(){//加载文件读取预设配置
     let prefablist=[]
     
@@ -523,7 +556,15 @@ function loadprefab(){//加载文件读取预设配置
           getjson.forEach(pf => {
             //读配置设置预设
             npf=new EggcodePrefab(pf.type,pf.catalog,pf.prefabname,pf.params,pf.content,pf.extraInfo,pf.id)
-            prefablist.push(npf)
+            npf.provide=pf.provide
+            
+            if(!pf.hide){//provide是供应蛋吗，hide是特殊蛋吗
+                prefablist.push(npf)
+            }else{
+                hideslist.push(npf)
+            }
+            
+
             npf['class']=pf['class']
             Id_to_Pf[npf.id]=npf
 
@@ -546,6 +587,9 @@ function loadprefab(){//加载文件读取预设配置
             //开始显示出预设积木
             pf.initInstance(allsorts)
           })
+          hideslist.forEach(hpf=>{
+            hpf.initInstance(allsorts)
+          })
           return prefablist
       })
       
@@ -564,6 +608,7 @@ let main = document.getElementById('main')
 let notice = document.getElementById('notice')//用户可以读到的提示
 let nameinput=document.getElementById("EGCname")
 let navi=document.getElementById('navi')
+let notice2=document.getElementById('noticeselect')
 let AllofPrefabs=[]
 let AllofEGCAs=[]//全局蛋码集合，EGCA
 let catasDict={
@@ -577,7 +622,10 @@ let typesDict={
 }
 let alltypes={}
 
-function changePrefabs(types,establishV,privilege=null){//参数为类型列表，改变显示预设
+
+
+function changePrefabs(types,vac,privilege=null){//参数为类型列表，改变显示预设
+    let establishV=vac.eventEstablished
     let avy=(types.length==0)
     if(!privilege){
     let display = ""
@@ -613,6 +661,13 @@ function changePrefabs(types,establishV,privilege=null){//参数为类型列表�
             pf.setVisible(privilege.includes(pf))
         }
     })
+
+    let curr_domain=vac.parent instanceof EggAssembly? vac.parent.domain_pfs : vac.parent.findroot().parent.domain_pfs
+    if(!curr_domain)return;
+    curr_domain.forEach(pf=>{
+        pf.setVisible(types.includes(pf.type))
+    })
+
 }
 
 
@@ -821,11 +876,25 @@ document.addEventListener("DOMContentLoaded",()=>{//main函数
     AllofEGCAs.push(new EggAssembly(main))
     
     
-loadprefab().then(pflist=>{//等文件读完
+    loadprefab().then(pflist=>{//等文件读完
     //console.dir(pflist)
-    AllofPrefabs=pflist
-pflist.forEach(pfl=>{
-    pfl.initEvents()
+        AllofPrefabs=pflist
+        pflist.forEach(pfl=>{
+
+            if(pfl.provide){
+                let realprovide=[]
+                pfl.provide.forEach(pid=>{
+                    realprovide.push(Id_to_Pf[pid])
+                })
+                pfl.provide=realprovide
+            }
+
+            pfl.initEvents()
+
+        hideslist.forEach(hpf=>{
+            
+            hpf.initEvents()
+        })
 })
 })
 
@@ -1036,7 +1105,7 @@ function query(q){
         }
     })
     
-    changePrefabs(Object.keys(typesDict),false,Array.from(results))
+    changePrefabs(Object.keys(typesDict),{eventEstablished:false},Array.from(results))
     
 
 }

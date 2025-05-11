@@ -178,6 +178,14 @@ body{
     border: 3px solid white;
 }
 
+#noticebox{
+    display: inline-block;
+    width: 75%;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+}
+
 .Event{
     cursor:pointer;
     text-align: center;
@@ -188,6 +196,7 @@ body{
     border-bottom-right-radius: 10px;
     
 }
+
 .Event:hover{
     background-color:rgb(180, 101, 10);
 }
@@ -206,6 +215,12 @@ body{
     overflow-x:auto;
     white-space: nowrap;
 }
+.EventwithProvide::after{
+    content: '《';
+    color: rgb(15, 219, 63);
+}
+
+
 
 .Action{
     cursor:pointer;
@@ -264,6 +279,12 @@ body{
     
     overflow-x:auto;
     white-space: nowrap;
+}
+
+.ControlwithProvide::after{
+    content: '《';
+    color: rgb(35, 219, 15);
+    
 }
 
 .Value{

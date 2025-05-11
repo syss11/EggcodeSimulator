@@ -22,6 +22,7 @@
     <!-- <a href="/egcProducer" target="_blank">前往制作蛋码</a> -->
     <br>
     <div id="operatebar1" class="operatebar">
+        <p id="noticeselect" style="font-weight: bold;display: inline;margin: 5px;">选中积木显示其名称</p>
 <button id="saver" onclick="saveEGC()" class="oper" title="json格式">保存作品</button>
         <button id="opener" onclick="openEGC()" class="oper" title="会清空已有蛋码">打开作品</button>
         <input type="file" style="display: none;" id="fileopener" accept=".json">
@@ -29,7 +30,9 @@
         <button id="ffll" onclick="changeflex()" class="oper" title="多蛋码排布方向">更换排列</button>
     </div>
     <div id="operatebar2" class="operatebar">
+        <div id="noticebox">
         <p id="notice" style="font-weight: bold;display: inline;margin: 5px;">暂无提示</p>
+        </div>
         <button id="deler" onclick="deleteEGC()" class="oper disoper" title="删除选中蛋码">删除</button>
         <button id="copyer" onclick="copyEGC()" class="oper disoper" title="复制蛋码行">复制</button>
         <button id="paster" onclick="pasteEGC()" class="oper disoper" title="直接粘贴蛋码行">粘贴</button>
