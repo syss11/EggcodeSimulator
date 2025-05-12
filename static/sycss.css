@@ -215,9 +215,8 @@ body{
     overflow-x:auto;
     white-space: nowrap;
 }
-.EventwithProvide::after{
-    content: '《';
-    color: rgb(15, 219, 63);
+.EventwithProvide{
+    background-image: linear-gradient(to right ,rgb(255, 177, 21) 80%,rgb(56, 191, 29));
 }
 
 
@@ -281,10 +280,9 @@ body{
     white-space: nowrap;
 }
 
-.ControlwithProvide::after{
-    content: '《';
-    color: rgb(35, 219, 15);
-    
+.ControlwithProvide{
+     background-image: linear-gradient(to right ,#a631fb 80%,rgb(56, 191, 29));
+
 }
 
 .Value{

@@ -569,6 +569,83 @@
             "provide":[
                 45
             ]
+        },
+        {
+            "type": "None",
+            "catalog": "Control",
+            "prefabname": "遍历整数",
+            "params": [
+                {
+                    "atype": [
+                        "Int"
+                    ],
+                    "value": null
+                },
+                {
+                    "atype": [
+                        "Int"
+                    ],
+                    "value": null
+                },
+                {
+                    "atype":[
+                        "Int"
+                    ],
+                    "value":null
+                }
+            ],
+            "content": [
+                "从",
+                "#",
+                "遍历到",
+                "#",
+                "，执行",
+                "#",
+                "次"
+            ],
+            "extraInfo": {
+                "Control": {}
+            },
+            "provide":[
+                47
+            ]
+        },
+        {
+            
+            "prefabname": "遍历到的整数",
+            "catalog": "Value",
+            "type": "Int",
+            "content": [
+                "遍历到的整数"
+            ],
+            "params": [
+                
+            ],
+            "class": null,
+            "hide":true
+        },
+        {
+            
+            "type": "None",
+            "catalog": "Action",
+            "prefabname": "设置变量",
+            "params": [
+                {
+                    "atype":["Var"],
+                    "value":null
+                },
+                {
+                    "atype":["Var"],
+                    "value":null
+                }
+            ],
+            "content": [
+                "设置",
+                "#",
+                "=",
+                "#"
+            ],
+            "class": "Common"
         }
     ],
     "EGCPrefab-spare": [

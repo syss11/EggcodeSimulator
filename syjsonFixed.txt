@@ -1,5 +1,9 @@
 {
     "AcceptClasses": {
+        "Var":{
+            "name":"变量",
+            "accept-pf":[]
+        },
         "String": {
             "name": "字符串",
             "accept-pf": []
