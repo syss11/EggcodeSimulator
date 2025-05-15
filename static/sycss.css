@@ -359,6 +359,32 @@ body{
     
 }
 
+.List{
+    cursor:pointer;
+    text-align: center;
+    background-color: rgb(48, 162, 212);
+    line-height: 35px;
+    height: 35px;
+    border-radius: 15px;
+}
+.List:hover{
+    background-color:rgb(45, 181, 240);
+}
+.eList{
+    padding: 5px;
+    display: inline;
+    cursor:pointer;
+    text-align: left;
+    background-color: rgb(48, 162, 212);
+    line-height: 35px;
+    height: 35px;
+    width: fit-content;
+    border-radius: 10px;
+    border: 1px solid white;
+    
+    
+}
+
 .assemble{
     border-radius: 10px;
     display: block;

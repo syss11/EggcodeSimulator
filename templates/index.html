@@ -46,9 +46,12 @@
                 <input id="vname" type="text" placeholder="输入名称..." maxlength="9"
                     style="background-color: aquamarine;border-radius: 5px;width: 80%;">
                 <br>
-                <button id="newV" onclick="createV('@')"
+                <button id="newV" onclick="createV('@',0)"
                     style="background-color: rgb(208, 18, 208);border-radius: 5px;font-weight: bold;color: white;"
                     title="@">创建变量</button>
+                <button id="newL" onclick="createV('@',1)"
+                    style="background-color: rgb(29, 187, 189);border-radius: 5px;font-weight: bold;color: white;"
+                    title="@">创建列表</button>
                 <select id="vtypes" style="background-color: cyan;"></select>
                 <br>
                 <button id="newV2" onclick="createV('×')"

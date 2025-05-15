@@ -118,11 +118,7 @@ class EggcodePrefab{//蛋码预设体
         }
     }
     initInstance(sorts){//实例化dom
-        if(false){
-            this.instance=null
-            //varmodel=this
-            return
-        }
+        
         let newe = document.createElement('div')
         newe.title="[id:"+this.id+"] "+catasDict[this.catalog]
         let newep = document.createElement('p')
@@ -316,7 +312,7 @@ class Eggcode{
                     //自动添加空缺
                     let nv= new Vacanacy(this,false)
                     nv.availType=paraCheck.atype
-                    
+                    dealspec(this,nv)
                     nv.index=n
                     nv.initInstance()
                     this.vacs.push(nv)
@@ -485,6 +481,9 @@ class Vacanacy{//表示蛋码空缺处，有两种类别
         if(this.availType.includes('Var')){
             this.spc_rule=(e)=>e.catalog=='Var'
         }
+        if(this.availType.includes('List')){
+            this.spc_rule=(e)=>e.catalog=='List'
+        }
 
 
         let myp=document.createElement('p')
@@ -518,6 +517,7 @@ class Vacanacy{//表示蛋码空缺处，有两种类别
             this.parent.paraDom[this.index].appendChild(this.instance)
             //找到对应span
         }
+
         mys.addEventListener('click',(e)=>{
             e.stopPropagation()//事件不能冒泡
             if (WHO){
@@ -537,6 +537,7 @@ let types_and_pfs={}
 let model=null
 let auto=false
 let hideslist=[]
+const nodisplaytyp=["s","Var","None","List","Calculate"]
 function loadprefab(){//加载文件读取预设配置
     let prefablist=[]
     
@@ -558,7 +559,7 @@ function loadprefab(){//加载文件读取预设配置
         
          alltypes.forEach(typ=>{//反转字典，加载option
             namesDict[typesDict[typ]]=typ
-            if(typ=="s" || typ=="None"){
+            if(nodisplaytyp.includes(typ)){
                 return
             }
             let newo=document.createElement('option')
@@ -1057,7 +1058,7 @@ function checkPrefab(what) {
 }
     
 
-function createV(header){//创建变量
+function createV(header,isList){//创建变量
     let text=vinput.value
     let nty=vtypes.value
     if(text.trim().length==0){
@@ -1073,15 +1074,20 @@ function createV(header){//创建变量
         return
     }
     
-    let negcp=new EggcodePrefab("","Var","",[],[""],undefined,0)
+    let negcp=new EggcodePrefab("",
+        isList?"List":"Var",
+        "",[],[""],undefined,0)
+
     negcp.id=900
     negcp.prefabname=header+" "+text
     negcp.content[0]=header+" "+text
-    negcp.class="Var"
-    negcp.type=namesDict[nty]
+    
+    negcp.type=isList?namesDict[nty]+"List":namesDict[nty]
+    negcp.class=namesDict[nty]
     AllofPrefabs.push(negcp)
     negcp.initInstance(allsorts)
     negcp.initEvents()
+    
     vinput.value=""
 }
 function loadV(name1,nty,tmp){//名字类型定义变量
@@ -1091,6 +1097,7 @@ function loadV(name1,nty,tmp){//名字类型定义变量
     negcp.content[0]=name1
     negcp.class="Var"
     negcp.type=nty
+    negcp.class=nty
     AllofPrefabs.push(negcp)
     Id_to_Pf[tmp]=negcp
     negcp.initInstance(allsorts)
@@ -1151,5 +1158,11 @@ function query(q){
     let arfm=Array.from(results)
     changePrefabs(Object.keys(typesDict),{eventEstablished:false},(e)=>arfm.includes(e))
     
+}
 
+function dealspec(egc){
+    return
+    if(egc.prefab.id==49){
+
+    }
 }

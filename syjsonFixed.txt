@@ -4,6 +4,10 @@
             "name":"变量",
             "accept-pf":[]
         },
+        "List":{
+            "name":"列表",
+            "accept-pf":[]
+        },
         "String": {
             "name": "字符串",
             "accept-pf": []
@@ -176,6 +180,8 @@
         "Input": "输入值",
         "PreFab": "预设",
         "Event": "事件",
+        "Game": "游戏",
+        "Common": "通用",
         "Control": "控制",
         "Action": "动作",
         "String": "字符串",
@@ -200,8 +206,7 @@
         "Effect": "效果",
         "Timer": "计时器",
         "Info": "信息",
-        "Game": "游戏",
-        "Common": "通用",
+        
         "Table": "表格",
         "List": "列表",
         "Pool": "权重池",
